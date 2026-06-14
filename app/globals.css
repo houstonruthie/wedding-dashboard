@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffdf9;
+  --foreground: #211d1b;
+  --ivory: #f8f1e5;
+  --paper: #faf7f1;
+  --ink: #25334d;
+  --sage: #8fa58d;
+  --blush: #e7aaa6;
+  --berry: #8c4b5b;
+  --linen: #ded0c2;
+  --taupe: #6c625a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body::before {
+  pointer-events: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.24;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(37, 51, 77, 0.06) 1px, transparent 0),
+    linear-gradient(135deg, rgba(255, 253, 249, 0.96), rgba(250, 247, 241, 0.38));
+  background-size: 28px 28px, 100% 100%;
+}
+
+::selection {
+  background: var(--blush);
+  color: var(--foreground);
 }
