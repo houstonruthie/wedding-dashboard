@@ -1,49 +1,507 @@
-@import "tailwindcss";
-
 :root {
-  --background: #fffdf9;
-  --foreground: #211d1b;
-  --ivory: #f8f1e5;
-  --paper: #faf7f1;
-  --ink: #25334d;
-  --sage: #8fa58d;
-  --blush: #e7aaa6;
-  --berry: #8c4b5b;
-  --linen: #ded0c2;
-  --taupe: #6c625a;
+  --lightPrimary1: #b2d1e5;
+  --darkPrimary1: #7696ab;
+  --lightPrimary2: #c0ceaa;
+  --darkPrimary2: #2e442d;
+  --secondary1: #fff4cd;
+  --secondary2: #f0bcc9;
+  --lightNeutral: #f4f4f2;
+  --darkNeutral: #01395f;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: Arial, Helvetica, sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: var(--darkNeutral);
+  font-family: var(--font-droid-serif), serif;
 }
 
-html {
-  scroll-behavior: smooth;
+.home-page {
+  display: grid;
+  min-height: 100vh;
+  padding: clamp(34px, 6vh, 70px) 24px;
+  overflow: hidden;
+  place-items: center;
+  background-color: var(--lightNeutral);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--lightPrimary1) 0,
+    var(--lightPrimary1) clamp(34px, 5.7vw, 78px),
+    var(--lightNeutral) clamp(34px, 5.7vw, 78px),
+    var(--lightNeutral) clamp(68px, 11.4vw, 156px)
+  );
 }
 
-body::before {
-  pointer-events: none;
+.wedding-entry-card {
+  position: relative;
+  display: grid;
+  width: min(430px, 74vw);
+  aspect-ratio: 0.72;
+  overflow: hidden;
+  isolation: isolate;
+  place-items: center;
+  border: 2px solid var(--darkNeutral);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--lightNeutral) 96%, white);
+  box-shadow:
+    0 0 0 8px var(--lightNeutral),
+    0 0 0 10px var(--darkNeutral),
+    0 24px 70px rgba(1, 57, 95, 0.16);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.wedding-entry-card::before {
+  position: absolute;
+  inset: 9px;
+  border: 1px solid var(--darkNeutral);
+  border-radius: inherit;
   content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  opacity: 0.24;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(37, 51, 77, 0.06) 1px, transparent 0),
-    linear-gradient(135deg, rgba(255, 253, 249, 0.96), rgba(250, 247, 241, 0.38));
-  background-size: 28px 28px, 100% 100%;
 }
 
-::selection {
-  background: var(--blush);
-  color: var(--foreground);
+.wedding-entry-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 8px var(--lightNeutral),
+    0 0 0 10px var(--darkNeutral),
+    0 30px 80px rgba(1, 57, 95, 0.22);
+}
+
+.wedding-entry-card:focus-visible {
+  outline: 3px solid var(--darkNeutral);
+  outline-offset: 14px;
+}
+
+.home-wedding-logo {
+  position: relative;
+  z-index: 2;
+  width: 88%;
+  height: auto;
+}
+
+.flower-art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 150%;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.welcome-page {
+  display: grid;
+  min-height: 100vh;
+  padding: 64px 24px;
+  place-items: center;
+  background: var(--lightNeutral);
+}
+
+.welcome-content {
+  display: flex;
+  width: min(1080px, 100%);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(44px, 8vw, 100px);
+}
+
+.engagement-frame {
+  flex: 0 1 430px;
+  padding: 14px;
+  border: 2px solid var(--darkPrimary2);
+  background: #fff;
+  box-shadow:
+    0 0 0 7px #fff,
+    0 0 0 8px var(--darkPrimary2),
+    0 24px 60px rgba(1, 57, 95, 0.16);
+}
+
+.engagement-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+
+.engagement-photo {
+  object-fit: cover;
+  object-position: center;
+}
+
+.welcome-title {
+  max-width: 460px;
+  margin: 0;
+  color: var(--darkPrimary2);
+  font-size: clamp(64px, 8vw, 118px);
+  line-height: 0.9;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .home-page {
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--lightPrimary1) 0,
+      var(--lightPrimary1) 34px,
+      var(--lightNeutral) 34px,
+      var(--lightNeutral) 68px
+    );
+  }
+
+  .wedding-entry-card {
+    width: min(76vw, 390px);
+  }
+
+  .welcome-page {
+    padding: 48px 24px 64px;
+  }
+
+  .welcome-content {
+    flex-direction: column;
+    gap: 42px;
+  }
+
+  .engagement-frame {
+    width: min(82vw, 390px);
+    flex-basis: auto;
+  }
+
+  .welcome-title {
+    font-size: clamp(58px, 19vw, 88px);
+  }
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.color-page {
+  min-height: 100vh;
+  padding: 56px 24px 80px;
+  background:
+    radial-gradient(circle at 85% 5%, color-mix(in srgb, var(--secondary2) 36%, transparent), transparent 28%),
+    linear-gradient(180deg, color-mix(in srgb, var(--lightNeutral) 72%, white), #fff 56%);
+}
+
+.color-shell {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.color-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 44px;
+}
+
+.eyebrow,
+.step {
+  margin: 0 0 14px;
+  color: var(--darkPrimary1);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-family: var(--font-luxurious-script), cursive;
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.intro {
+  max-width: 600px;
+  margin-bottom: 0;
+  color: #615d58;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.back-link {
+  flex: none;
+  padding: 12px 18px;
+  border: 1px solid color-mix(in srgb, var(--darkPrimary1) 22%, #d8d3cc);
+  border-radius: 999px;
+  color: var(--darkNeutral);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.palette-card,
+.picker-card {
+  border: 1px solid #e6e1da;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 65px rgba(47, 39, 34, 0.07);
+}
+
+.palette-card {
+  padding: 32px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-family: var(--font-luxurious-script), cursive;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.section-heading > p {
+  margin-bottom: 4px;
+  color: #827c75;
+  font-size: 13px;
+}
+
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.swatch-group {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.swatch-button {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.swatch-color {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 5px solid #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px #ddd7d0;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.swatch-button:hover .swatch-color {
+  transform: translateY(-3px);
+}
+
+.swatch-button.selected .swatch-color {
+  box-shadow: 0 0 0 3px var(--darkNeutral), 0 10px 24px rgba(35, 31, 28, 0.13);
+}
+
+.checkmark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #282522;
+  font-weight: 700;
+}
+
+.swatch-label,
+.swatch-hex {
+  display: block;
+}
+
+.swatch-label {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.swatch-hex {
+  margin-top: 5px;
+  color: #8a847e;
+  font-family: var(--font-droid-serif), serif;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.picker-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  margin-top: 20px;
+  padding: 32px;
+}
+
+.picker-copy > p:last-child {
+  max-width: 420px;
+  margin: 14px 0 0;
+  color: #77716b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.picker-controls {
+  display: grid;
+  grid-template-columns: 78px 1fr auto;
+  align-items: end;
+  gap: 14px;
+}
+
+.native-picker {
+  display: block;
+  width: 78px;
+  height: 78px;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px #d8d2cb;
+  cursor: pointer;
+}
+
+.native-picker input {
+  width: 130%;
+  height: 130%;
+  margin: -15%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hex-field span {
+  display: block;
+  margin-bottom: 8px;
+  color: #716b65;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hex-field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #dcd6cf;
+  border-radius: 10px;
+  outline: none;
+  font-family: var(--font-droid-serif), serif;
+  text-transform: uppercase;
+}
+
+.hex-field input:focus {
+  border-color: var(--darkNeutral);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--darkNeutral) 16%, transparent);
+}
+
+.save-button {
+  height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--darkNeutral);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.save-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 760px) {
+  .color-page {
+    padding: 32px 16px 56px;
+  }
+
+  .color-header {
+    display: block;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 24px;
+  }
+
+  .palette-card,
+  .picker-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading > p {
+    margin-top: 10px;
+  }
+
+  .swatch-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .picker-card {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .picker-controls {
+    grid-template-columns: 70px 1fr;
+  }
+
+  .native-picker {
+    width: 70px;
+    height: 70px;
+  }
+
+  .save-button {
+    grid-column: 1 / -1;
+  }
 }

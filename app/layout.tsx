@@ -1,9 +1,26 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
+const droidSerif = localFont({
+  src: [
+    { path: "./fonts/droid-serif-regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/droid-serif-bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-droid-serif",
+  display: "swap",
+});
+
+const luxuriousScript = localFont({
+  src: "./fonts/luxurious-script.ttf",
+  variable: "--font-luxurious-script",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Ruthie Wedding",
-  description: "A wedding website and private planning space for April 22, 2028.",
+  title: "Website",
+  description: "",
 };
 
 export default function RootLayout({
@@ -12,8 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body className={`${droidSerif.variable} ${luxuriousScript.variable}`}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
